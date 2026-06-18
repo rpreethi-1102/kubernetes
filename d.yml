@@ -4,17 +4,23 @@ metadata:
   name: d1
 spec:
   template:
-     metadata:
+    metadata:
+      name: pod1
       labels:
         app: web
-     spec:
+    spec:
       containers:
-        - name: c1
-          image: nginx
-          ports:
-            - containerPort: 80
+      - name: container
+        image: nginx
+        ports:
+        - containerPort: 80
+        env:
+          - name: Name
+            valueFrom:
+              secretKeyRef:
+                name: s2
+                key: Name
   replicas: 4
   selector:
     matchLabels:
       app: web
-
